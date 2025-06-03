@@ -1,0 +1,8 @@
+node_modules
+/node_modules
+node_modules/
+
+backend/image
+
+backend/public
+machineLearning/Lithology/best.pt
