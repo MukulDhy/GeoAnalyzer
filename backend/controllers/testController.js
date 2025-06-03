@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:669ec3eae4a8e1864522e437d869fdb13fb0869d33eb1fda8a2d8d934d2de8f0
-size 683
+const catchAsyncError = require("../middlewares/catchAsyncError");
+const ErrorHandler = require("../utils/ErrorHandler");
+const ApiFeatures = require("../utils/ApiFeaturs");
+const gernateJWTtoken = require("../utils/sendJWTToken");
+
+/* Get Test Message  */
+const getTestMessage = catchAsyncError(async (req, res) => {
+
+  console.log("Last Controller.....")
+  console.log("Test Message");
+  const { data } = req.body;
+  const basValue = req.query.bas;
+  console.log('Received data:', data);
+  console.log(req.query)
+    res.status(200).json({
+      success : true,
+      message : "Its working fine."
+    });
+
+});
+
+module.exports = {
+    getTestMessage
+  };
+  

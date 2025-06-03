@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:364a00b4438c055800bd105840f972cace2bb50c7e8e704b8e007638a46a5386
-size 174
+const catchAsyncError = require("./catchAsyncError");
+
+
+const test1Controller = catchAsyncError(async (req,res,next) => {
+
+    console.log("Controller == Test1");
+
+});
