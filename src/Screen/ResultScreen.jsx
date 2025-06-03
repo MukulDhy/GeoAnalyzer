@@ -271,7 +271,7 @@ const ResultScreen = () => {
   // Function to fetch the result image after successful analysis
   const fetchResultImage = useCallback(async () => {
     try {
-      const resultImageUrl = `http://localhost:6969/api/v1/image/result/${imageId}`;
+      const resultImageUrl = `https://geoanalyzer.onrender.com/api/v1/image/result/${imageId}`;
 
       // Test if the image exists by making a HEAD request or trying to load it
       const img = new Image();

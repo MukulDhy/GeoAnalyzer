@@ -44,7 +44,7 @@ const ImageUpload = () => {
     console.log("config = ", config);
     try {
       const response = await axios.post(
-        "http://localhost:6969/api/v1/image/new",
+        "https://geoanalyzer.onrender.com/api/v1/image/new",
         formData,
         config
       );

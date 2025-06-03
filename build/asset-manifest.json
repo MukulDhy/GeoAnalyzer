@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ae865eb1.css",
+    "main.js": "/static/js/main.d5105388.js",
+    "static/js/787.795028c0.chunk.js": "/static/js/787.795028c0.chunk.js",
+    "static/media/homevid.mp4": "/static/media/homevid.d7ddb112bea440529b3a.mp4",
+    "static/media/analyseCore.mp4": "/static/media/analyseCore.825b84691e6067651ce8.mp4",
+    "static/media/core.mp4": "/static/media/core.1a4b9d1289445346d1ae.mp4",
+    "static/media/litho.png": "/static/media/litho.c00384285e44b0011392.png",
+    "static/media/crack.png": "/static/media/crack.698d1c49ecfaff61baad.png",
+    "static/media/basa.png": "/static/media/basa.a266bab6846df15224cd.png",
+    "static/media/digitalScaleHero.png": "/static/media/digitalScaleHero.42d9b3fe74aa3c55402c.png",
+    "static/media/mom.png": "/static/media/mom.2d5d0d912d09a386919a.png",
+    "static/media/aicte.png": "/static/media/aicte.37d318a86245d55bc9b0.png",
+    "static/media/computerVision.jpg": "/static/media/computerVision.1e7b83815fb4405b7c50.jpg",
+    "static/media/logo.png": "/static/media/logo.676280c573850466bb47.png",
+    "static/media/logoDeepLearnign.png": "/static/media/logoDeepLearnign.3e797b56d0ebbd29d411.png",
+    "index.html": "/index.html",
+    "main.ae865eb1.css.map": "/static/css/main.ae865eb1.css.map",
+    "main.d5105388.js.map": "/static/js/main.d5105388.js.map",
+    "787.795028c0.chunk.js.map": "/static/js/787.795028c0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ae865eb1.css",
+    "static/js/main.d5105388.js"
+  ]
+}

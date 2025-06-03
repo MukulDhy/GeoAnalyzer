@@ -53,8 +53,8 @@ const RockLoginForm = () => {
 
       // Make API call
       const endpoint = isLogin
-        ? "http://localhost:6969/api/v1/user/login"
-        : "http://localhost:6969/api/v1/user/signup";
+        ? "https://geoanalyzer.onrender.com/api/v1/user/login"
+        : "https://geoanalyzer.onrender.com/api/v1/user/signup";
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {

@@ -174,7 +174,7 @@ export const imageMlDataAction = (id, task) => async (dispatch) => {
 
     // Fixed: config should be the third parameter, not request body
     const response = await axios.post(
-      `http://localhost:6969/api/v1/ml/${task}/${id}`,
+      `https://geoanalyzer.onrender.com/api/v1/ml/${task}/${id}`,
       {}, // Empty request body (or add data if needed)
       config // Configuration as third parameter
     );
