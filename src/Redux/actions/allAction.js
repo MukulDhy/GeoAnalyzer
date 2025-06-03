@@ -140,27 +140,115 @@ export const checkUserAction = () => async (dispatch) => {
   }
 };
 
+// Redux Action - Fixed Version
 export const imageMlDataAction = (id, task) => async (dispatch) => {
   try {
+    // Reset any previous errors
     dispatch({ type: IMAGE_ML_DETAIL_REQUEST });
+
+    // Get token and clean it (remove extra quotes if present)
+    let token = localStorage.getItem("token");
+    if (token) {
+      // Remove extra quotes if they exist
+      token = token.replace(/^["']|["']$/g, "");
+    }
+
+    // Validate required parameters
+    if (!id || !task) {
+      throw new Error("Missing required parameters: id and task are required");
+    }
+
+    if (!token) {
+      throw new Error("Authentication token not found. Please login again.");
+    }
 
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
       },
+      timeout: 30000, // 30 second timeout
     };
-    // const token = await Cookies.get("token");
-    const response = await axios.post(`/api/v1/ml/${task}/${id}`, config);
-    console.log(response.data);
-    dispatch({ type: IMAGE_ML_DETAIL_SUCCESS, payload: response.data });
+
+    console.log(`Making ML API call: ${task}/${id}`);
+
+    // Fixed: config should be the third parameter, not request body
+    const response = await axios.post(
+      `http://localhost:6969/api/v1/ml/${task}/${id}`,
+      {}, // Empty request body (or add data if needed)
+      config // Configuration as third parameter
+    );
+
+    console.log("ML API Response:", response.data);
+
+    // Check if response has expected structure
+    if (!response.data) {
+      throw new Error("Invalid response from server");
+    }
+
+    dispatch({
+      type: IMAGE_ML_DETAIL_SUCCESS,
+      payload: {
+        result: response.data.result || response.data.prediction || null,
+        orgResponse: response.data.orgResponse || response.data.message || null,
+        fullResponse: response.data,
+      },
+    });
   } catch (error) {
+    console.error("ML API Error:", error);
+
+    let errorMessage = "An unexpected error occurred";
+    let errorCode = null;
+
+    if (error.response) {
+      // Server responded with error status
+      errorCode = error.response.status;
+
+      switch (errorCode) {
+        case 401:
+          errorMessage = "Authentication failed. Please login again.";
+          // Optionally clear token and redirect to login
+          localStorage.removeItem("token");
+          break;
+        case 403:
+          errorMessage =
+            "Access denied. You don't have permission to perform this action.";
+          break;
+        case 404:
+          errorMessage = "The requested resource was not found.";
+          break;
+        case 422:
+          errorMessage = "Invalid data provided. Please check your input.";
+          break;
+        case 429:
+          errorMessage = "Too many requests. Please try again later.";
+          break;
+        case 500:
+          errorMessage = "Server error. Please try again later.";
+          break;
+        default:
+          errorMessage =
+            error.response.data?.message ||
+            error.response.data?.error ||
+            `Server error (${errorCode})`;
+      }
+    } else if (error.request) {
+      // Network error
+      errorMessage =
+        "Network error. Please check your connection and try again.";
+    } else {
+      // Other error
+      errorMessage = error.message || errorMessage;
+    }
+
     dispatch({
       type: IMAGE_ML_DETAIL_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: {
+        message: errorMessage,
+        error: errorMessage,
+        code: errorCode,
+        fullError: error,
+      },
     });
   }
 };

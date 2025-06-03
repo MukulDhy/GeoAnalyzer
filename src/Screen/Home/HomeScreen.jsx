@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { checkUserAction } from "../../Redux/actions/allAction";
 
-
 const TeamMember = ({ name, title, imageSrc, url }) => (
   <div className="w-full md:w-6/12 lg:w-3/12 mb-6 px-6 sm:px-6 lg:px-4">
     <div className="flex flex-col ">
@@ -72,20 +71,20 @@ const TeamSection = () => (
 );
 
 const HomeScreen = () => {
-
   const dispatch = useDispatch();
-  
-  const fetch = () => {
-    dispatch(checkUserAction());
-    return;
-  };
 
-  setTimeout(fetch, 3000);
+  // const fetch = () => {
+  //   dispatch(checkUserAction());
+  //   return;
+  // };
 
+  // setTimeout(fetch, 3000);
 
   return (
     <>
-      <TeamSection />
+      <div className="px-20 py-10">
+        <TeamSection />
+      </div>
     </>
   );
 };

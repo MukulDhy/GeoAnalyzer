@@ -48,6 +48,7 @@ const RockLoginForm = () => {
             name: formData.name,
             email: formData.email,
             password: formData.password,
+            phoneNumber: formData.phoneNumber,
           };
 
       // Make API call
@@ -61,8 +62,9 @@ const RockLoginForm = () => {
         },
         body: JSON.stringify(requestData),
       });
-      console.log(response)
+      console.log(response);
       const data = await response.json();
+      console.log(data);
 
       if (!response.ok) {
         throw new Error(
@@ -76,6 +78,9 @@ const RockLoginForm = () => {
       // Store token if provided
       if (data.token) {
         // In a real app, you'd store this securely
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", JSON.stringify(data.token));
+        localStorage.setItem("userId", JSON.stringify(data.token));
         console.log("Token received:", data.token);
       }
 
@@ -89,7 +94,7 @@ const RockLoginForm = () => {
             isLogin ? "Login" : "Signup"
           } successful! Redirecting to home page...`
         );
-        // window.location.href = '/home'; // Uncomment for actual navigation
+        window.location.href = "/model"; // Uncomment for actual navigation
       }, 1500);
     } catch (err) {
       setError(err.message);
@@ -356,7 +361,7 @@ const RockLoginForm = () => {
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-stone-400 w-5 h-5 group-focus-within:text-amber-400 transition-colors" />
                   <input
                     type="text"
-                    name="number"
+                    name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                     className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-300 hover:bg-white/10"
