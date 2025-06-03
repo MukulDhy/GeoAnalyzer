@@ -27,7 +27,7 @@ const router = express.Router();
 router.route("/new").post(isAuthorization, upload.single("file"), addNewImage);
 // router.post("/new",upload.single('file'),addNewImage);
 
-router.route("/result/:_id").get(isAuthorization,getResultImage);
+router.route("/result/:_id").get(getResultImage);
 
 // // router
 // //   .route("/addImage")

@@ -5,11 +5,22 @@ const userSchema = new mongoose.Schema(
   {
     userId: {
       type: Number,
-      unique: true,
     },
     name: {
       type: String,
       required: [true, "Please Enter the Your Name"],
+    },
+    email: {
+      type: String,
+      required: [true, "Please Enter the Your Email"],
+    },
+    phoneNumber: {
+      type: String,
+      required: [true, "Please Enter the Your Phone Number"],
+    },
+    password: {
+      type: String,
+      required: true,
     },
     createdAt: {
       type: Date,
@@ -23,9 +34,7 @@ const userSchema = new mongoose.Schema(
 
 /* Create Json web Token */
 userSchema.methods.gernateJWTtoken = function () {
-  return jsonwebToken.sign({ userId: this._id }, process.env.JWT_KEY, {
-    expiresIn: process.env.JWT_EXPIRE,
-  });
+  return jsonwebToken.sign({ userId: this }, process.env.JWT_KEY);
 };
 
 const User = mongoose.model("User", userSchema);

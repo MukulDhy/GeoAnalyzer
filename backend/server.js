@@ -6,10 +6,9 @@ const imageRoutes = require("./routes/imageRoutes");
 const mlRoutes = require("./routes/machineLearningRoutes");
 const errorMiddleWare = require("./middlewares/errorHandling");
 require("colors");
-
+const PORT = process.env.PORT || 6969;
 // Database Connection
 connectionMongoDb();
-
 // Routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/image", imageRoutes);
@@ -19,7 +18,7 @@ app.use("/api/v1/ml", mlRoutes);
 app.use(errorMiddleWare);
 
 // Server Initialization
-app.listen(process.env.PORT, "localhost", () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(
     `Server is working on http://localhost:${process.env.PORT}`.underline
       .bgGreen
